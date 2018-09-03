@@ -61,8 +61,8 @@ check-docker:
 docker-binary: BINDIR = ./rootfs
 docker-binary: GOFLAGS += -a -installsuffix cgo
 docker-binary:
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 $(GO) build -o $(BINDIR)/helm $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LDFLAGS)' k8s.io/helm/cmd/helm
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 $(GO) build -o $(BINDIR)/tiller $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LDFLAGS)' k8s.io/helm/cmd/tiller
+	GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=0 $(GO) build -o $(BINDIR)/helm $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LDFLAGS)' k8s.io/helm/cmd/helm
+	GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=0 $(GO) build -o $(BINDIR)/tiller $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LDFLAGS)' k8s.io/helm/cmd/tiller
 
 .PHONY: docker-build
 docker-build: check-docker docker-binary
